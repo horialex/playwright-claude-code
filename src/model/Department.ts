@@ -10,3 +10,11 @@ export interface Department {
     description: string;
     parent?: string;
 }
+
+export interface CreateDepartmentPayload {
+    name: string;
+    type: string;
+    description: string;
+    unit_id: number;
+    status: number;
+}

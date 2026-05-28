@@ -1,11 +1,11 @@
 ---
 name: pom-skill
-description: Use this skill when creating or modifying Page Object Models
+description: Use this skill when creating, modifying, or reviewing Playwright Page Object Models, reusable page components, locators, or page-level helper methods.
 ---
 
 
 ## POM Rules
-Ground rule: Create a new page object only when there isn't one for that page or section of the page
+Ground rule: create a new page object only when there is not already one for that page or reusable page section.
 
 Page objects own:
 - All page objects must inherit `BasePage`
@@ -34,7 +34,7 @@ Prefer:
 
 ## Method Style
 
-Use clear, small methods.
+Use clear, small methods that describe one page-level action or query.
 
 Good examples:
 - `fillEmail(email: string)`

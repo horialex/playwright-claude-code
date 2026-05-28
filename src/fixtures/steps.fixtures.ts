@@ -4,6 +4,10 @@ import { CitizenRequestsSteps } from '@/steps/ui/CitizenRequestsSteps';
 import { GeneralSteps } from '@/steps/ui/GeneralSteps';
 import { HeaderSteps } from '@/steps/ui/HeaderSteps';
 import { DepartmentsSteps } from '@/steps/ui/DepartmentsSteps';
+import { Department, CreateDepartmentPayload } from '@/model/Department';
+import { DepartmentFactory } from '@/factories/DepartmentFactory';
+import { admin } from '@/config/users';
+import { application } from '@/config/apps';
 
 type StepFixtures = {
     loginSteps: LoginSteps;
@@ -11,6 +15,7 @@ type StepFixtures = {
     generalSteps: GeneralSteps;
     headerSteps: HeaderSteps;
     departmentsSteps: DepartmentsSteps;
+    parentDirectieDepartment: Department;
 };
 
 export const test = pageTest.extend<StepFixtures>({

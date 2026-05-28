@@ -2,6 +2,7 @@ import test, { expect, Page } from "@playwright/test";
 import { ApiHelper } from "./ApiHelper";
 import { extractCsrfToken, getAppLink } from "../utils/HtmlHelper";
 import { Routes } from "../routes/routes";
+import { getSessionInstance, SessionKeys } from "../utils/SessionUtils";
 
 export class LoginService {
     private readonly page: Page;
@@ -59,6 +60,7 @@ export class LoginService {
         await test.step(`Login to application via API request`, async () => {
             await this.loginDigitalCitizenApiRequest(email, password);
             await this.openApplicationApiRequest(appName, email);
+            await this.extractBearerToken();
         });
     }
 
@@ -67,7 +69,9 @@ export class LoginService {
         if (!raw) {
             throw new Error('Bearer token not found in localStorage. Make sure the user is logged in to the application.');
         }
-        return JSON.parse(raw);
+        const token = JSON.parse(raw);
+        getSessionInstance().putOnSession(SessionKeys.BEARER, token);
+        return token;
     }
 
 }

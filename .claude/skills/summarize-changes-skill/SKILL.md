@@ -1,5 +1,5 @@
 ---
-name: summarize-changes
+name: summarize-changes-skill
 description: Summarizes uncommitted changes and flags anything risky. Use when the user asks what changed, wants a commit message, or asks to review their diff.
 ---
 

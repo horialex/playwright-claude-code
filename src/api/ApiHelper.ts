@@ -3,7 +3,7 @@ import { APIRequestContext, APIResponse } from '@playwright/test';
 type Headers = Record<string, string>;
 type QueryParams = Record<string, string | number | boolean>;
 type RequestBody =
-    | Record<string, unknown>
+    | object
     | unknown[]
     | string
     | number

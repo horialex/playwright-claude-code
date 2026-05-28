@@ -1,6 +1,6 @@
 ---
-name: api-convention
-description: Conventions for writing API Service classes and test helpers in this automation project
+name: api-test-helpers-skill
+description: Use when writing or updating API service classes, API test helpers, API setup/cleanup flows, or API-based assertions in this automation project.
 ---
 
 # API Conventions

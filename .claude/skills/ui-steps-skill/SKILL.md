@@ -1,5 +1,5 @@
 ---
-name: ui-step-writer
+name: ui-steps-skill
 description: Create business-level UI steps that compose Page Object Model actions.
 ---
 

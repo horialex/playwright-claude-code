@@ -1,5 +1,6 @@
-import { CitizenRequestsPage } from '@/pages/digial_citizen/CitizenRequestsPage';
+
 import { RequestStatus } from '@/constants/DigitalCitizenConstants';
+import { CitizenRequestsPage } from '@/pages/CitizenRequestsPage';
 
 export class CitizenRequestsSteps {
     private citizenRequestsPage: CitizenRequestsPage;
