@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ESNext",
+        "strict": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "bundler",
+        "types": [
+            "node"
+        ],
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
+    },
+    "include": [
+        "tests",
+        "playwright",
+        "src/**/*.d.ts",
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Hori\\\\Desktop\\\\Evozon\\\\primarii\\\\src\" -Recurse -Force | Where-Object { $_.PSIsContainer } | Select-Object FullName)",
+      "PowerShell(head -50)",
+      "Bash(npx playwright *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ]
+  }
+}

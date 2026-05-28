@@ -1,0 +1,27 @@
+{
+  "name": "primarii",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:mobile-chrome": "npx playwright test --project=\"Mobile Chrome - Samsung Galaxy S9+\"",
+    "test:mobile-safari": "npx playwright test --project=\"Mobile Safari - iPhone 15\"",
+    "test:mobile": "npx playwright test --project=\"Mobile Chrome - Samsung Galaxy S9+\" --project=\"Mobile Safari - iPhone 15\"",
+    "test:report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@playwright/test": "^1.60",
+    "@types/node": "^22.19.19"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

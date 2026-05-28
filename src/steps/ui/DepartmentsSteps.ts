@@ -1,0 +1,63 @@
+import { expect, test } from '@/fixtures/common.fixtures';
+import { DepartmentsPage } from '@/pages/DepartmentsPage';
+import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
+import { Department } from '@/model/Department';
+
+export class DepartmentsSteps {
+    private departmentsPage: DepartmentsPage;
+    private departmentFormPage: DepartmentFormPage;
+
+    constructor(departmentsPage: DepartmentsPage, departmentFormPage: DepartmentFormPage) {
+        this.departmentsPage = departmentsPage;
+        this.departmentFormPage = departmentFormPage;
+    }
+
+    async verifyDepartmentsPageIsLoaded(): Promise<void> {
+        await test.step('Verify departments page is loaded', async () => {
+            await this.departmentsPage.verifyPageIsLoaded();
+        });
+    }
+
+    async searchForDepartment(name: string): Promise<void> {
+        await test.step(`Search for department: ${name}`, async () => {
+            await this.departmentsPage.search(name);
+        });
+    }
+
+    async clickAddDepartmentButton(): Promise<void> {
+        await test.step('Open add department form', async () => {
+            await this.departmentsPage.clickAddDepartment();
+        });
+    }
+
+    async openEditDepartmentForm(name: string): Promise<void> {
+        await test.step(`Open edit form for department: ${name}`, async () => {
+            await this.departmentsPage.clickEditDepartment(name);
+        });
+    }
+
+    async deleteDepartment(name: string): Promise<void> {
+        await test.step(`Delete department: ${name}`, async () => {
+            await this.departmentsPage.clickDeleteDepartment(name);
+        });
+    }
+
+    async verifyDepartmentIsListed(name: string): Promise<void> {
+        await test.step(`Verify department is listed: ${name}`, async () => {
+            await expect(this.departmentsPage.getDepartmentRow(name)).toBeVisible();
+        });
+    }
+
+    async createDepartment(department: Department): Promise<void> {
+        await test.step(`Create department: ${department.name}`, async () => {
+            await this.departmentFormPage.verifyPageIsLoaded();
+            await this.departmentFormPage.fillName(department.name);
+            await this.departmentFormPage.selectType(department.type);
+            if (department.parent) {
+                await this.departmentFormPage.selectParent(department.parent);
+            }
+            await this.departmentFormPage.fillDescription(department.description);
+            await this.departmentFormPage.clickSave();
+        });
+    }
+}
