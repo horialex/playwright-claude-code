@@ -2,6 +2,7 @@ import { expect, test } from '@/fixtures/common.fixtures';
 import { DepartmentsPage } from '@/pages/DepartmentsPage';
 import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
 import { Department } from '@/model/Department';
+import { TestLogger } from '@/utils/TestLogger';
 
 export class DepartmentsSteps {
     private departmentsPage: DepartmentsPage;
@@ -58,6 +59,8 @@ export class DepartmentsSteps {
             }
             await this.departmentFormPage.fillDescription(department.description);
             await this.departmentFormPage.clickSave();
+
+            TestLogger.logUi(`Department created: ${department.name}`);
         });
     }
 }

@@ -27,6 +27,7 @@ export class DepartmentsPage extends BasePage {
 
     async search(keyword: string): Promise<void> {
         await this.searchInput.fill(keyword);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clickEditDepartment(name: string): Promise<void> {

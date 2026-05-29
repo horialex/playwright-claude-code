@@ -4,7 +4,7 @@ import { admin } from '@/config/users';
 import { application } from '@/config/apps';
 import { AdminSettingsOption } from '@/constants/HeaderConstants';
 import { DepartmentFactory } from '@/factories/DepartmentFactory';
-import { CreateDepartmentPayload } from '@/model/Department';
+import { Department } from '@/model/Department';
 
 test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
 
@@ -14,7 +14,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
     });
 
     test('admin user can create a department: Direction -> "Directie"', async ({ headerSteps, departmentsSteps }) => {
-        const direction = DepartmentFactory.buildDirectie();
+        const direction = DepartmentFactory.buildDirection();
 
         await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
         await departmentsSteps.clickAddDepartmentButton();
@@ -25,26 +25,22 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
     test.only('admin user can create a sub department: Service -> "Serviciu"', async ({
         departmentService,
         headerSteps,
-        departmentsSteps,
-        page
+        departmentsSteps
     }) => {
 
-        const direction = DepartmentFactory.buildDirectie();
-        const directiePayload: CreateDepartmentPayload = {
-            name: direction.name,
-            type: "direction",
-            description: direction.description,
-            unit_id: application.unitId,
-            status: 1,
-        };
+        const directionData = DepartmentFactory.buildDirection();
+        const direction: Department = await departmentService.createDepartment(
+            directionData,
+            DepartmentFactory.toPayload(directionData, application.unitId)
+        );
 
-        // TODO: Extract the response as json and hidrate the deparmtnet object with the id
-        await departmentService.createDepartment(directiePayload);
-        const serviciu = DepartmentFactory.buildServiciu(direction.name);
+        const service = DepartmentFactory.buildService(direction.name);
         await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
         await departmentsSteps.clickAddDepartmentButton();
-        await departmentsSteps.createDepartment(serviciu);
-        await departmentsSteps.verifyDepartmentIsListed(serviciu.name);
+        await departmentsSteps.createDepartment(service);
+        await departmentsSteps.searchForDepartment(service.name)
+
+        await departmentsSteps.verifyDepartmentIsListed(service.name);
     });
 
 });
