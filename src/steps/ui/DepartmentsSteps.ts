@@ -3,6 +3,8 @@ import { DepartmentsPage } from '@/pages/DepartmentsPage';
 import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
 import { Department } from '@/model/Department';
 import { TestLogger } from '@/utils/TestLogger';
+import { DepartmentParent } from '@/constants/DepartmentConstants';
+import { DepartmentParentPages } from '@/routes/routes';
 
 export class DepartmentsSteps {
     private departmentsPage: DepartmentsPage;
@@ -11,6 +13,18 @@ export class DepartmentsSteps {
     constructor(departmentsPage: DepartmentsPage, departmentFormPage: DepartmentFormPage) {
         this.departmentsPage = departmentsPage;
         this.departmentFormPage = departmentFormPage;
+    }
+
+    async navigateToDepartmentParent(parent: keyof typeof DepartmentParentPages): Promise<void> {
+        await test.step(`Navigate to department parent: ${parent}`, async () => {
+            await this.departmentsPage.page.goto(DepartmentParentPages[parent]);
+        });
+    }
+
+    async selectDepartmentParent(parent: DepartmentParent): Promise<void> {
+        await test.step(`Select department parent: ${parent}`, async () => {
+            await this.departmentsPage.selectParentDepartment(parent);
+        });
     }
 
     async verifyDepartmentsPageIsLoaded(): Promise<void> {
@@ -46,6 +60,12 @@ export class DepartmentsSteps {
     async verifyDepartmentIsListed(name: string): Promise<void> {
         await test.step(`Verify department is listed: ${name}`, async () => {
             await expect(this.departmentsPage.getDepartmentRow(name)).toBeVisible();
+        });
+    }
+
+    async verifyDepartmentIsNotListed(name: string): Promise<void> {
+        await test.step(`Verify department is not listed: ${name}`, async () => {
+            await expect(this.departmentsPage.getDepartmentRow(name)).not.toBeVisible();
         });
     }
 

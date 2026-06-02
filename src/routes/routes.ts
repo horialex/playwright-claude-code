@@ -1,3 +1,5 @@
+import { DepartmentParent } from '@/constants/DepartmentConstants';
+
 export const Routes = {
     LOGIN: "/auth/login",
     DIGITAL_CITIZEN_DASHBOARD: '/idm',
@@ -7,5 +9,10 @@ export const Routes = {
 
 export const DigitalCitizenPages = {
     CITIZEN: '/citizen',
+};
 
-}
+export const DepartmentParentPages = {
+    FLUX_DIGITAL: '/compartmentsreg',
+    DOSAR_DIGITAL: '/compartmentsdoc',
+    REGISTRATURA: '/compartmentsone',
+};

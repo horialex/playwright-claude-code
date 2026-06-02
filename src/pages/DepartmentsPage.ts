@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@/pages/BasePage';
+import { DepartmentParent } from '@/constants/DepartmentConstants';
 
 export class DepartmentsPage extends BasePage {
     private readonly pageHeading: Locator;
@@ -15,6 +16,10 @@ export class DepartmentsPage extends BasePage {
         this.addDepartmentButton = main.getByRole('button', { name: 'Adaugă Compartiment' });
         this.departmentsTable = main.getByRole('table');
         this.searchInput = main.getByRole('textbox', { name: 'Caută' });
+    }
+
+    async selectParentDepartment(parent: DepartmentParent): Promise<void> {
+        await this.page.getByRole('link', { name: parent }).click();
     }
 
     async verifyPageIsLoaded(): Promise<void> {

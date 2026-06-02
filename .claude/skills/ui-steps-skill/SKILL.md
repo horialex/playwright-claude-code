@@ -4,7 +4,6 @@ description: Create business-level UI steps that compose Page Object Model actio
 ---
 
 Use this skill when creating or modifying UI step files.
-
 They live under `src/steps/ui`
 
 

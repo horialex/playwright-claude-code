@@ -5,6 +5,8 @@ import { Routes } from "../routes/routes";
 import { getSessionInstance, SessionKeys } from "../utils/SessionUtils";
 import { hydrateWith } from "../utils/Utils";
 import { TestLogger } from "../utils/TestLogger";
+import { DepartmentFactory } from "../factories/DepartmentFactory";
+import { application } from "../config/apps";
 
 
 export class DepartmentService {
@@ -14,7 +16,22 @@ export class DepartmentService {
         this.api = new ApiHelper(apiContext);
     }
 
-    async createDepartment(department: Department, payload: CreateDepartmentPayload): Promise<Department> {
+    async createDirection(): Promise<Department> {
+        const directionData = DepartmentFactory.buildDirection();
+        return this.create(directionData, DepartmentFactory.toPayload(directionData, application.unitId));
+    }
+
+    async createService(directionParent: Department): Promise<Department> {
+        const serviceData = DepartmentFactory.buildService(directionParent.name);
+        return this.create(serviceData, DepartmentFactory.toPayload(serviceData, application.unitId, directionParent.id));
+    }
+
+    async createDepartment(serviceParent: Department): Promise<Department> {
+        const departmentData = DepartmentFactory.buildDepartment(serviceParent.name);
+        return this.create(departmentData, DepartmentFactory.toPayload(departmentData, application.unitId, serviceParent.id));
+    }
+
+    private async create(department: Department, payload: CreateDepartmentPayload): Promise<Department> {
         const bearerToken = getSessionInstance().getFromSession(SessionKeys.BEARER)
         return test.step(`Create department "${payload.name}"`, async () => {
             const response = await this.api.request
@@ -29,4 +46,5 @@ export class DepartmentService {
             return entity;
         });
     }
+
 }

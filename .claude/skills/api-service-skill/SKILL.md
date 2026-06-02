@@ -1,6 +1,6 @@
 ---
-name: api-test-helpers-skill
-description: Use when writing or updating API service classes, API test helpers, API setup/cleanup flows, or API-based assertions in this automation project.
+name: api-service-skill
+description: Use this skill when working with API service classes, including building requests, structuring service methods, handling responses, and supporting test setup or cleanup through API interactions.
 ---
 
 # API Conventions
