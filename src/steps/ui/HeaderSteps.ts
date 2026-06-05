@@ -15,8 +15,9 @@ export class HeaderSteps {
         });
     }
 
-    async openAdminSettings(option: AdminSettingsOption): Promise<void> {
+    async selectAdminSettingsOption(option: AdminSettingsOption): Promise<void> {
         await test.step(`Open admin settings: ${option}`, async () => {
+            await this.headerPage.clickUserSettingsButton();
             await this.headerPage.selectAdminSettingsOption(option);
         });
     }

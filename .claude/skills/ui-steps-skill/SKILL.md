@@ -1,33 +1,35 @@
 ---
 name: ui-steps-skill
-description: Create business-level UI steps that compose Page Object Model actions.
+description: Use this skill when you are asked to create and maintain business-level UI step definitions that orchestrate Page Object Model actions into meaningful user flows.
 ---
 
-Use this skill when creating or modifying UI step files.
-They live under `src/steps/ui`
+Use this skill when creating or updating UI step files located in `src/steps/ui`.
 
 
-## UI Step Purpose
+## Purpose
 
-UI steps represent business-readable user actions.
-They should combine page object methods into meaningful flows.
+UI steps represent **business-level user behavior**, not low-level UI interaction.  
+They act as a bridge between test scenarios and Page Object Models by composing reusable UI actions into clear, domain-relevant flows.
 
-## UI Step Rules
+## Responsibilities
 
 UI steps should:
-- Use Page Object Models for UI interaction.
-- Have business-readable method names.
-- Keep flows focused.
-- Accept typed data from factories.
-- Return useful domain results only when needed.
-- Every public method wraps its work in `test.step()`:
+- Orchestrate **Page Object Model (POM)** methods into meaningful user actions.
+- Expose **business-readable methods** (e.g. `createAccount`, `placeOrder`).
+- Keep flows **focused and cohesive** (one responsibility per method).
+- Accept **typed input data** (e.g. from factories or fixtures).
+- Return **useful domain-level results** only when necessary.
+- Wrap each public method in `test.step()` for traceability.
 
-UI steps should not:
-- Contain raw locators.
-- Contain API endpoint logic.
-- Generate complex test data internally.
-- Hide important assertions unless the project uses assertion steps.
-- Become large scripts with many unrelated actions.
+## Boundaries
+
+UI steps must not:
+- Use **raw selectors or locators** (this belongs in POMs).
+- Contain **API logic or network calls**.
+- Generate **complex test data internally**.
+- Mix **multiple unrelated flows** in a single method.
+- Hide critical assertions (unless using dedicated assertion steps).
+
 
 
 ## When Creating a Step
@@ -37,3 +39,7 @@ UI steps should not:
 3. Add missing POM methods only if needed.
 4. Keep the step name aligned with user behavior.
 5. Keep assertions separate unless existing convention says otherwise.
+
+## Design Principle
+
+UI steps should read like **user actions in plain English**, while remaining thin orchestration layers over POMs.

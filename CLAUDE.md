@@ -2,7 +2,7 @@
 This is a Playwright TypeScript automation testing project.
 
 ## Project Overview
-Playwright-based E2E and API test automation for the **Citizen Connect Cluj** digital citizen platform.
+Playwright-based E2E automation testing project for the **Citizen Connect Cluj** digital citizen platform.
 
 ## Commands
 @.claude/commands.md
@@ -11,14 +11,14 @@ Playwright-based E2E and API test automation for the **Citizen Connect Cluj** di
 The project follows **Page Object Model (POM) + UI Steps Layer + API Service + Fixtures** pattern.
 
 ### Layer responsibilities
-- **Tests** (`tests/`) — Spec files; receive steps and services via fixtures
+- **Tests** (`tests/`) — Spec files; receive ui steps and api services methods via fixtures
 - **Fixtures** (`src/fixtures/`) — Playwright dependency injection; `common.fixtures.ts` is the single import point for tests
 - **UI Steps** (`src/steps/ui/`) — Compose page object calls into user flows; exposed to tests via fixtures
-- **Page Objects** (`src/pages/`) — Encapsulate UI interactions per page; extend `BasePage`
 - **Services** (`src/api/`) — Orchestrate multi-step API flows (e.g., login with CSRF handling); consumed by fixtures
-- **API Helper** (`src/api/ApiHelper.ts`) — Fluent builder for HTTP requests with type-safe `getJson<T>()` / `postJson<T>()`
-- **Data Factories** (`src/factories/`) — Generate valid, typed test data objects; used by tests and services for setup
-- **Utils / Constants** (`src/utils/`, `src/constants/`, `src/model/`) — Route strings, enums, shared data models
+- **Page Objects** (`src/pages/`) — Encapsulate UI interactions per page or page section; extend `BasePage`
+- **API Helper** (`src/api/ApiHelper.ts`) — Layer over Playwright `apiRequest` fixture that builds the requests using fluent builder pattern
+- **Data Factories** (`src/factories/`) — Generate test data objects; used by tests and services for setup
+- **Utils / Constants** (`src/utils/`, `src/constants/`, `src/model/`) — Route strings, enums, constants, shared data models
 
 ### Data flow in tests
 ```

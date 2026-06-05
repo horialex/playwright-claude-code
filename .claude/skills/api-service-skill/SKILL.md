@@ -1,84 +1,58 @@
 ---
 name: api-service-skill
-description: Use this skill when working with API service classes, including building requests, structuring service methods, handling responses, and supporting test setup or cleanup through API interactions.
+description: Use this skill any time API service classes are involved — including creating, modifying, or reviewing service methods, request builders, response handling, or API-based test setup and cleanup. This includes: building or updating service methods, structuring requests using ApiHelper, supporting test data setup via API, or refactoring service layering. Trigger whenever the user mentions API services, request chains, endpoints, API helpers, service classes, or test setup/cleanup via API. If API interaction logic is being defined or changed, use this skill.
 ---
 
-# API Conventions
+# Purpose
 
-They are used for:
-- Test setup
-- Test cleanup
-- API-based assertions
-- Faster creation of required state
-- Avoiding slow UI setup
-- Use `src/api/ApiHelper.ts` to build the requests in Service classes
-- Return the response as JSON with `getJson` or `postJSON` only when we need to unmarshall the response ponse 
+API service classes provide a **reusable abstraction over backend interactions** for tests.  
+They are used to prepare, manipulate, and validate system state faster than UI flows.
 
-API services should not:
-- Use page objects.
-- Use UI locators.
-- Depend on test files directly.
-- Hardcode secrets.
-- Hide failed API responses without useful error messages.
+The layer is built on top of Playwright `request` fixture.
 
+## Responsibilities
 
-## Before Adding a Method
+API services should:
+- Build and execute **typed API requests**
+- Encapsulate endpoint-specific logic in **service methods**
+- Support **test setup and cleanup**
+- Return **typed responses when needed**
+- Use `ApiHelper` as the single request-building abstraction
 
-1. Check existing service methods.
-2. Follow existing naming and typing patterns.
-3. Use data factory output if appropriate.
-4. Add cleanup support if test data is created.
+## Boundaries
 
-## ApiHelper fluent chain
+API services must not:
+- Use **UI page objects or locators**
+- Depend on **test files directly**
+- Hardcode **secrets or environment-specific values**
+- Suppress **useful API error information**
+- Contain **UI workflow logic**
 
-Every request is built by chaining on `api.request`, then terminated with an HTTP verb:
+## Primary Use Cases
+
+API services are used for:
+- Test setup and teardown
+- Fast state preparation
+- API-based assertions or validations
+- Avoiding slow UI flows
+- Direct backend interaction in tests
+
+## File and Dependency Rules
+
+- Use `src/api/ApiHelper.ts` for all request construction
+- Services should not bypass `ApiHelper`
+- Return data via:
+  - `APIResponse` when full response is needed
+  - Typed `.getJson<T>() / .postJson<T>()` only when response unmarshalling is required
+
+## Request Builder Pattern
+
+All requests use fluent chaining on `api.request` and terminate with an HTTP method:
 
 ```ts
 const response = await this.api.request
-    .path(`${this.getApiUrl()}${Routes.SOME_ENDPOINT}`)
-    .bearerToken(token)          // optional
-    .body(payload)               // JSON body
-    .expectStatus(201)           // optional — throws with full context on mismatch
+    .path(`${this.getApiUrl()}${Routes.EXAMPLE}`)
+    .bearerToken(token)
+    .body(payload)
+    .expectStatus(201)
     .post();
-```
-
-Terminate with:
-- `.post()` / `.get()` / `.put()` / `.patch()` / `.delete()` — returns `APIResponse`
-- `.postJson<T>()` / `.getJson<T>()` etc. — returns `T` (use only when you need to unmarshal the response body)
-
-Body setters (mutually exclusive — setting one clears the others):
-- `.body(obj)` — JSON body
-- `.form(obj)` — URL-encoded form
-- `.multipart(obj)` — multipart/form-data
-
-## Service constructor
-
-Use `page.request` when the service needs to share the browser session (cookies, SSO):
-```ts
-constructor(page: Page) {
-    this.api = new ApiHelper(page.request);
-}
-```
-
-Use `APIRequestContext` when the service makes independent API calls (e.g., test data setup):
-```ts
-constructor(apiContext: APIRequestContext) {
-    this.api = new ApiHelper(apiContext);
-}
-```
-
-## Service method shape
-
-Every public method wraps its work in `test.step()`:
-```ts
-async submitSomething(payload: SomePayload, token: string): Promise<APIResponse> {
-    return test.step(`Submit something`, async () => {
-        return this.api.request
-            .path(...)
-            .bearerToken(token)
-            .body(payload)
-            .post();
-    });
-}
-```
- 

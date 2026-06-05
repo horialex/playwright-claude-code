@@ -4,61 +4,45 @@ import { admin } from '@/config/users';
 import { application } from '@/config/apps';
 import { AdminSettingsOption } from '@/constants/HeaderConstants';
 import { DepartmentFactory } from '@/factories/DepartmentFactory';
-import { DepartmentParent } from '@/constants/DepartmentConstants';
+import { DepartmentSectionTab } from '@/constants/DepartmentConstants';
 
 
 test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
 
-    test.beforeEach(async ({ loginSteps, loginService }) => {
+    test.beforeEach(async ({ loginService }) => {
         await loginService.loginToApplicationRequest(admin.email, admin.pass, application.appName);
-        await loginSteps.verifyUserIsOnApplicationPage(admin.emailPrefix);
     });
 
     test('admin user can create a top-level department [Directie]', async ({ headerSteps, departmentsSteps }) => {
         const direction = DepartmentFactory.buildDirection();
 
-        await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
         await departmentsSteps.clickAddDepartmentButton();
         await departmentsSteps.createDepartment(direction);
         await departmentsSteps.searchForDepartment(direction.name);
 
         await departmentsSteps.verifyDepartmentIsListed(direction.name);
+        await departmentsSteps.verifyDepartmentRowDetails(direction);
     });
 
-    test('admin user can create a service under a direction [Directie -> Serviciu]', async ({
+    test('admin user can create a service department under a direction parent department [Directie -> Serviciu]', async ({
         departmentService,
         headerSteps,
         departmentsSteps
     }) => {
 
         const direction = await departmentService.createDirection();
+        const serviceDepartment = DepartmentFactory.buildService(direction.name, { name: 'Ioana_Service' });
 
-        const serviceDepartment = DepartmentFactory.buildService(direction.name);
-        await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
         await departmentsSteps.clickAddDepartmentButton();
         await departmentsSteps.createDepartment(serviceDepartment);
         await departmentsSteps.searchForDepartment(serviceDepartment.name)
 
         await departmentsSteps.verifyDepartmentIsListed(serviceDepartment.name);
+        await departmentsSteps.verifyDepartmentRowDetails(serviceDepartment);
     });
 
-    test.only('admin user can create a direction department [Directie] under [Flux digital] section and verify it is not visible in [Dosar digital] section', async ({
-        headerSteps,
-        departmentsSteps
-    }) => {
-        const direction = DepartmentFactory.buildDirection();
-
-        await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
-        await departmentsSteps.selectDepartmentParent(DepartmentParent.FLUX_DIGITAL);
-        await departmentsSteps.clickAddDepartmentButton();
-        await departmentsSteps.createDepartment(direction);
-        await departmentsSteps.searchForDepartment(direction.name);
-        await departmentsSteps.verifyDepartmentIsListed(direction.name);
-
-        await departmentsSteps.selectDepartmentParent(DepartmentParent.DOSAR_DIGITAL);
-        await departmentsSteps.searchForDepartment(direction.name);
-        await departmentsSteps.verifyDepartmentIsNotListed(direction.name);
-    });
 
     test('admin user can create a department under a service [Directie -> Serviciu -> Departament]', async ({
         departmentService,
@@ -68,13 +52,52 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
 
         const direction = await departmentService.createDirection();
         const serviceDepartment = await departmentService.createService(direction);
-
         const department = DepartmentFactory.buildDepartment(serviceDepartment.name);
-        await headerSteps.openAdminSettings(AdminSettingsOption.DEPARTMENTS);
+
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
         await departmentsSteps.clickAddDepartmentButton();
         await departmentsSteps.createDepartment(department);
         await departmentsSteps.searchForDepartment(department.name);
+
         await departmentsSteps.verifyDepartmentIsListed(department.name);
+        await departmentsSteps.verifyDepartmentRowDetails(department);
+    });
+
+    test('admin user can create a direction department [Directie] under [Flux digital] section and verify it is not visible in [Dosar digital] section', async ({
+        headerSteps,
+        departmentsSteps
+    }) => {
+        const direction = DepartmentFactory.buildDirection();
+
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
+        await departmentsSteps.selectDepartmentTab(DepartmentSectionTab.FLUX_DIGITAL);
+        await departmentsSteps.clickAddDepartmentButton();
+        await departmentsSteps.createDepartment(direction);
+        await departmentsSteps.searchForDepartment(direction.name);
+        await departmentsSteps.verifyDepartmentIsListed(direction.name);
+
+        await departmentsSteps.selectDepartmentTab(DepartmentSectionTab.DOSAR_DIGITAL);
+        await departmentsSteps.searchForDepartment(direction.name);
+        await departmentsSteps.verifyDepartmentIsNotListed(direction.name);
+    });
+
+    test('admin user can clear search filter and see all departments listed', async ({
+        departmentService,
+        headerSteps,
+        departmentsSteps,
+    }) => {
+        const direction1 = await departmentService.createDirection();
+        const direction2 = await departmentService.createDirection();
+
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
+        await departmentsSteps.searchForDepartment(direction1.name);
+        await departmentsSteps.verifyDepartmentIsListed(direction1.name);
+        await departmentsSteps.verifyDepartmentCount(1);
+        await departmentsSteps.clickClearFilters();
+        await departmentsSteps.verifyDepartmentIsListed(direction1.name);
+        await departmentsSteps.verifyDepartmentIsListed(direction2.name);
+        await departmentsSteps.verifyMultipleDepartmentsListed();
+
     });
 
 });

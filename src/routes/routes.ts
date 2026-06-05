@@ -1,4 +1,4 @@
-import { DepartmentParent } from '@/constants/DepartmentConstants';
+import { DepartmentSectionTab } from '@/constants/DepartmentConstants';
 
 export const Routes = {
     LOGIN: "/auth/login",

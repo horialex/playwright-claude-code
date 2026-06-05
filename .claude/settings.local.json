@@ -5,7 +5,12 @@
       "PowerShell(head -50)",
       "Bash(npx playwright *)",
       "Skill(update-config)",
-      "Skill(update-config:*)"
+      "Skill(update-config:*)",
+      "Skill(playwright-cli)",
+      "Skill(playwright-cli:*)"
     ]
-  }
+  },
+  "disabledMcpjsonServers": [
+    "playwright"
+  ]
 }

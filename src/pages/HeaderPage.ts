@@ -50,7 +50,6 @@ export class HeaderPage extends BasePage {
     }
 
     async selectAdminSettingsOption(item: AdminSettingsOption): Promise<void> {
-        await this.clickUserSettingsButton();
         await this.page.getByRole('menuitem', { name: item as string, exact: true }).click();
     }
 

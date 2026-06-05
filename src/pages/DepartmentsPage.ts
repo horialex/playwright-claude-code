@@ -1,12 +1,13 @@
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@/pages/BasePage';
-import { DepartmentParent } from '@/constants/DepartmentConstants';
+import { DepartmentSectionTab } from '@/constants/DepartmentConstants';
 
 export class DepartmentsPage extends BasePage {
     private readonly pageHeading: Locator;
     private readonly addDepartmentButton: Locator;
     private readonly departmentsTable: Locator;
     private readonly searchInput: Locator;
+    private readonly clearFiltersButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -16,9 +17,10 @@ export class DepartmentsPage extends BasePage {
         this.addDepartmentButton = main.getByRole('button', { name: 'Adaugă Compartiment' });
         this.departmentsTable = main.getByRole('table');
         this.searchInput = main.getByRole('textbox', { name: 'Caută' });
+        this.clearFiltersButton = page.getByRole('button', { name: 'Șterge filtrele' });
     }
 
-    async selectParentDepartment(parent: DepartmentParent): Promise<void> {
+    async selectParentDepartment(parent: DepartmentSectionTab): Promise<void> {
         await this.page.getByRole('link', { name: parent }).click();
     }
 
@@ -47,5 +49,43 @@ export class DepartmentsPage extends BasePage {
 
     getDepartmentRow(name: string): Locator {
         return this.departmentsTable.getByRole('row', { name });
+    }
+
+    getDepartmentRowCell(name: string, columnIndex: number): Locator {
+        return this.getDepartmentRow(name).getByRole('cell').nth(columnIndex);
+    }
+
+    getDepartmentRowName(name: string): Locator {
+        return this.getDepartmentRowCell(name, 0);
+    }
+
+    getDepartmentRowType(name: string): Locator {
+        return this.getDepartmentRowCell(name, 1);
+    }
+
+    getDepartmentRowParent(name: string): Locator {
+        return this.getDepartmentRowCell(name, 2);
+    }
+
+    getDepartmentRowStatus(name: string): Locator {
+        return this.getDepartmentRowCell(name, 5);
+    }
+
+    getDepartmentRowClerks(name: string): Locator {
+        return this.getDepartmentRowCell(name, 3);
+    }
+
+    getDepartmentRowLastEdited(name: string): Locator {
+        return this.getDepartmentRowCell(name, 4);
+    }
+
+    async clickClearFilters(): Promise<void> {
+        await this.clearFiltersButton.click();
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    async getVisibleRowCount(): Promise<number> {
+        await this.page.waitForLoadState('networkidle');
+        return await this.departmentsTable.locator('tr:has(div)').count();
     }
 }

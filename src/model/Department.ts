@@ -1,7 +1,14 @@
+import { Clerk } from '@/model/Clerk';
+
 export enum DepartmentType {
     DIRECTIE = 'direcție',
     DEPARTAMENT = 'departament',
     SERVICIU = 'serviciu',
+}
+
+export enum DepartmentStatus {
+    ACTIV = 'activ',
+    INACTIV = 'inactiv',
 }
 
 export enum ApiDepartmentType {
@@ -16,6 +23,9 @@ export interface Department {
     type: DepartmentType;
     description: string;
     parent?: string;
+    status: DepartmentStatus;
+    lastUpdatedDate: string;
+    clerks: Clerk[];
 }
 
 

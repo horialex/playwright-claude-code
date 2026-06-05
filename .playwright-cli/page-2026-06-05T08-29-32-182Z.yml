@@ -1,0 +1,54 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - paragraph [ref=e8]: Prima pagină
+        - paragraph [ref=e9]: Registratură
+        - paragraph [ref=e10]: Flux Digital
+        - paragraph [ref=e11]: Soluționări
+        - paragraph [ref=e12]: Emitenți/Destinatari
+        - paragraph [ref=e13]: Dosar Digital
+        - paragraph [ref=e14]: Gestionare Dosar
+      - button "Deschideți setările" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+      - button "Deschideți setările de administrator" [ref=e21] [cursor=pointer]:
+        - img [ref=e22]
+      - generic "Schimbă limba" [ref=e27]:
+        - combobox "Romania" [ref=e28] [cursor=pointer]:
+          - img "Romania" [ref=e29]
+        - textbox: ro
+        - img
+        - group
+      - button "Deschideți notificările" [ref=e30] [cursor=pointer]:
+        - img [ref=e32]
+  - main [ref=e34]:
+    - progressbar [ref=e36]:
+      - img [ref=e37]
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]:
+          - img [ref=e42]
+          - text: Acest site web folosește cookie-uri.
+        - generic [ref=e47]:
+          - text: Acest site web folosește cookie-uri pentru a îmbunătăți experiența utilizatorului. Prin utilizarea site-ului nostru web, sunteți de acord cu toate cookie-urile în conformitate cu
+          - link "Politica de confidentialitate." [ref=e48] [cursor=pointer]:
+            - /url: /terms
+      - button "Accept cookies" [ref=e50] [cursor=pointer]: Accept
+  - contentinfo [ref=e51]:
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - button "Prima pagină" [ref=e55] [cursor=pointer]
+        - button "Registratură" [ref=e56] [cursor=pointer]
+        - button "Flux Digital" [ref=e57] [cursor=pointer]
+        - button "Soluționări" [ref=e58] [cursor=pointer]
+        - button "Emitenți/Destinatari" [ref=e59] [cursor=pointer]
+        - button "Dosar Digital" [ref=e60] [cursor=pointer]
+        - button "Gestionare Dosar" [ref=e61] [cursor=pointer]
+      - generic [ref=e62]:
+        - paragraph [ref=e63]: Copyright © 2026 - Digital Zalau.
+        - paragraph [ref=e64]:
+          - text: O soluție implementată de
+          - link "primaria.eu" [ref=e66] [cursor=pointer]:
+            - /url: https://www.primaria.eu/
+      - link "Termeni și condiții" [ref=e69] [cursor=pointer]:
+        - /url: /terms

@@ -1,0 +1,59 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - paragraph [ref=e8]: Prima pagină
+          - paragraph [ref=e9]: Registratură
+          - paragraph [ref=e10]: Flux Digital
+          - paragraph [ref=e11]: Soluționări
+          - paragraph [ref=e12]: Emitenți/Destinatari
+          - paragraph [ref=e13]: Dosar Digital
+          - paragraph [ref=e14]: Gestionare Dosar
+        - button [ref=e80] [cursor=pointer]:
+          - img [ref=e17]
+        - button [ref=e81] [cursor=pointer]:
+          - img [ref=e22]
+        - generic [ref=e82]:
+          - combobox [ref=e83] [cursor=pointer]:
+            - img [ref=e84]
+          - textbox: ro
+          - img
+          - group
+        - button [ref=e85] [cursor=pointer]:
+          - img [ref=e32]
+    - main [ref=e34]:
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - img [ref=e74]
+          - heading [level=2] [ref=e86]: "500"
+        - heading [level=1] [ref=e87]: Eroare
+        - paragraph [ref=e78]: A apărut o eroare la procesarea înregistrării. Vă rugăm să încercați din nou mai târziu.
+        - button [ref=e88] [cursor=pointer]: Inapoi la pagina principala
+    - contentinfo [ref=e51]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - button [ref=e89] [cursor=pointer]: Prima pagină
+          - button [ref=e90] [cursor=pointer]: Registratură
+          - button [ref=e91] [cursor=pointer]: Flux Digital
+          - button [ref=e92] [cursor=pointer]: Soluționări
+          - button [ref=e93] [cursor=pointer]: Emitenți/Destinatari
+          - button [ref=e94] [cursor=pointer]: Dosar Digital
+          - button [ref=e95] [cursor=pointer]: Gestionare Dosar
+        - generic [ref=e62]:
+          - paragraph [ref=e63]: Copyright © 2026 - Digital Zalau.
+          - paragraph [ref=e64]:
+            - text: O soluție implementată de
+            - link [ref=e96] [cursor=pointer]:
+              - /url: https://www.primaria.eu/
+              - text: primaria.eu
+        - link [ref=e97] [cursor=pointer]:
+          - /url: /terms
+          - text: Termeni și condiții
+  - menu [ref=e100]:
+    - menuitem "Contul meu" [active] [ref=e101] [cursor=pointer]:
+      - img [ref=e103]
+      - paragraph [ref=e106]: Contul meu
+    - menuitem "Deconectare" [ref=e107] [cursor=pointer]:
+      - img [ref=e109]
+      - paragraph [ref=e111]: Deconectare
