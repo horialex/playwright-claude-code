@@ -1,5 +1,0 @@
-[      53ms] [LOG] GA disabled on: client-citizen-connect.dev.evozon.com @ http://client-citizen-connect.dev.evozon.com/:17
-[     571ms] [LOG]  window.location.hostname client-citizen-connect.dev.evozon.com @ http://client-citizen-connect.dev.evozon.com/assets/BMogMGw4.js:219
-[     607ms] [LOG]  window.location.hostname client-citizen-connect.dev.evozon.com @ http://client-citizen-connect.dev.evozon.com/assets/BMogMGw4.js:219
-[     616ms] [ERROR] Access token not found. @ http://client-citizen-connect.dev.evozon.com/assets/BMogMGw4.js:207
-[     975ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://fiware.dev.evozon.com/:0

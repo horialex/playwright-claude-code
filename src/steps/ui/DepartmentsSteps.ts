@@ -78,8 +78,6 @@ export class DepartmentsSteps {
     async verifyDepartmentCount(expected: number): Promise<void> {
         await test.step(`Verify department list shows ${expected} result(s)`, async () => {
             const count = await this.departmentsPage.getVisibleRowCount();
-
-            console.log("Count 1: ", count)
             expect(count).toBe(expected);
         });
     }
@@ -87,7 +85,6 @@ export class DepartmentsSteps {
     async verifyMultipleDepartmentsListed(): Promise<void> {
         await test.step('Verify multiple departments are listed', async () => {
             const count = await this.departmentsPage.getVisibleRowCount();
-            console.log("Count 2: ", count)
             expect(count).toBeGreaterThan(1);
         });
     }
@@ -96,11 +93,29 @@ export class DepartmentsSteps {
         await test.step(`Verify row details for department: ${department.name}`, async () => {
 
             await expect(this.departmentsPage.getDepartmentRowName(department.name)).toHaveText(department.name);
-            await expect(this.departmentsPage.getDepartmentRowType(department.name)).toHaveText(department.type);
+            await expect(this.departmentsPage.getDepartmentRowType(department.type)).toHaveText(department.type);
             await expect(this.departmentsPage.getDepartmentRowParent(department.name)).toHaveText(department.parent ?? '--');
-            await expect(this.departmentsPage.getDepartmentRowClerks(department.name)).toHaveText(department.clerks.length === 0 ? '--' : String(department.clerks.length));
-            await expect(this.departmentsPage.getDepartmentRowLastEdited(department.name)).toContainText(department.lastUpdatedDate);
-            await expect(this.departmentsPage.getDepartmentRowStatus(department.name)).toHaveText(department.status);
+            await expect(this.departmentsPage.getDepartmentRowClerks(department.name)).toHaveText(department.clerks!.length === 0 ? '--' : String(department.clerks!.length));
+            await expect(this.departmentsPage.getDepartmentRowLastEdited(department.name)).toContainText(department.lastUpdatedDate!);
+            await expect(this.departmentsPage.getDepartmentRowStatus(department.name)).toHaveText(department.status!);
+        });
+    }
+
+    async fillDepartmentFormFields(department: Department): Promise<void> {
+        await test.step(`Fill department form fields for: ${department.name}`, async () => {
+            await this.departmentFormPage.verifyPageIsLoaded();
+            await this.departmentFormPage.fillName(department.name);
+            await this.departmentFormPage.selectType(department.type);
+            if (department.parent) {
+                await this.departmentFormPage.selectParent(department.parent);
+            }
+            await this.departmentFormPage.fillDescription(department.description);
+        });
+    }
+
+    async verifyParentFieldIsDisabled(): Promise<void> {
+        await test.step('Verify "Inclus în" field is disabled', async () => {
+            await expect(this.departmentFormPage.getParentSelect()).toBeDisabled();
         });
     }
 

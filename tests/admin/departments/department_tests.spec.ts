@@ -63,7 +63,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
         await departmentsSteps.verifyDepartmentRowDetails(department);
     });
 
-    test('admin user can create a direction department [Directie] under [Flux digital] section and verify it is not visible in [Dosar digital] section', async ({
+    test('admin user can create a direction department [Directie] under [Flux digital] section and verify it is not visible in [Dosar digital] or [Registratura] section', async ({
         headerSteps,
         departmentsSteps
     }) => {
@@ -79,6 +79,23 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
         await departmentsSteps.selectDepartmentTab(DepartmentSectionTab.DOSAR_DIGITAL);
         await departmentsSteps.searchForDepartment(direction.name);
         await departmentsSteps.verifyDepartmentIsNotListed(direction.name);
+
+        await departmentsSteps.selectDepartmentTab(DepartmentSectionTab.REGISTRATURA);
+        await departmentsSteps.searchForDepartment(direction.name);
+        await departmentsSteps.verifyDepartmentIsNotListed(direction.name);
+    });
+
+    test('admin user cannot select a parent when creating a top-level direction [Directie - nivel 1]', async ({
+        headerSteps,
+        departmentsSteps
+    }) => {
+        const direction = DepartmentFactory.buildDirection();
+
+        await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
+        await departmentsSteps.selectDepartmentTab(DepartmentSectionTab.FLUX_DIGITAL);
+        await departmentsSteps.clickAddDepartmentButton();
+        await departmentsSteps.fillDepartmentFormFields(direction);
+        await departmentsSteps.verifyParentFieldIsDisabled();
     });
 
     test('admin user can clear search filter and see all departments listed', async ({

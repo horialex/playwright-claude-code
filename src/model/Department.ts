@@ -23,9 +23,9 @@ export interface Department {
     type: DepartmentType;
     description: string;
     parent?: string;
-    status: DepartmentStatus;
-    lastUpdatedDate: string;
-    clerks: Clerk[];
+    status?: DepartmentStatus;
+    lastUpdatedDate?: string;
+    clerks?: Clerk[];
 }
 
 

@@ -57,4 +57,8 @@ export class DepartmentFormPage extends BasePage {
     async isSaveEnabled(): Promise<boolean> {
         return this.isElementClickable(this.saveButton);
     }
+
+    getParentSelect(): Locator {
+        return this.parentSelect;
+    }
 }

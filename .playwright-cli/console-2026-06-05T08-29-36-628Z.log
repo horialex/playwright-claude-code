@@ -1,3 +1,0 @@
-[      36ms] [LOG] GA disabled on: client-citizen-connect.dev.evozon.com @ http://client-citizen-connect.dev.evozon.com/admin/compartimente:17
-[      69ms] [LOG]  window.location.hostname client-citizen-connect.dev.evozon.com @ http://client-citizen-connect.dev.evozon.com/assets/BMogMGw4.js:219
-[    1181ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://api-citizen-connect.dev.evozon.com/api/v1/request-types/compartimente:0
