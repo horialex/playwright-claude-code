@@ -9,8 +9,5 @@
       "Skill(playwright-cli)",
       "Skill(playwright-cli:*)"
     ]
-  },
-  "disabledMcpjsonServers": [
-    "playwright"
-  ]
+  }
 }

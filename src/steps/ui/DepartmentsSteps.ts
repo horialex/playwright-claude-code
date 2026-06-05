@@ -75,6 +75,12 @@ export class DepartmentsSteps {
         });
     }
 
+    async toggleFilters(): Promise<void> {
+        await test.step('Toggle filters panel', async () => {
+            await this.departmentsPage.clickFiltersToggle();
+        });
+    }
+
     async verifyDepartmentCount(expected: number): Promise<void> {
         await test.step(`Verify department list shows ${expected} result(s)`, async () => {
             const count = await this.departmentsPage.getVisibleRowCount();

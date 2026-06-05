@@ -8,6 +8,7 @@ export class DepartmentsPage extends BasePage {
     private readonly departmentsTable: Locator;
     private readonly searchInput: Locator;
     private readonly clearFiltersButton: Locator;
+    private readonly filtersToggleButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -18,6 +19,7 @@ export class DepartmentsPage extends BasePage {
         this.departmentsTable = main.getByRole('table');
         this.searchInput = main.getByRole('textbox', { name: 'Caută' });
         this.clearFiltersButton = page.getByRole('button', { name: 'Șterge filtrele' });
+        this.filtersToggleButton = main.locator('button:has(svg[data-testid="ExpandLessIcon"]), button:has(svg[data-testid="ExpandMoreIcon"])');
     }
 
     async selectParentDepartment(parent: DepartmentSectionTab): Promise<void> {
@@ -81,6 +83,11 @@ export class DepartmentsPage extends BasePage {
 
     async clickClearFilters(): Promise<void> {
         await this.clearFiltersButton.click();
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    async clickFiltersToggle(): Promise<void> {
+        await this.filtersToggleButton.click();
         await this.page.waitForLoadState('networkidle');
     }
 

@@ -47,6 +47,19 @@ export default defineConfig({
       },
     },
 
+    {
+      name: 'chromium-local',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+        launchOptions: {
+          slowMo: process.env.SLOW_MO ? parseInt(process.env.SLOW_MO, 10) : 100,
+          args: ['--remote-debugging-port=9222'],
+          ...(process.env.PROXY_SERVER ? { proxy: { server: 'per-context' } } : {}),
+        },
+      },
+    },
+
 
     {
       name: 'firefox',

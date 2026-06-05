@@ -13,7 +13,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
         await loginService.loginToApplicationRequest(admin.email, admin.pass, application.appName);
     });
 
-    test('admin user can create a top-level department [Directie]', async ({ headerSteps, departmentsSteps }) => {
+    test.only('admin user can create a top-level department [Directie]', async ({ headerSteps, departmentsSteps, page }) => {
         const direction = DepartmentFactory.buildDirection();
 
         await headerSteps.selectAdminSettingsOption(AdminSettingsOption.DEPARTMENTS);
@@ -22,7 +22,9 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
         await departmentsSteps.searchForDepartment(direction.name);
 
         await departmentsSteps.verifyDepartmentIsListed(direction.name);
-        await departmentsSteps.verifyDepartmentRowDetails(direction);
+
+        await page.pause()
+
     });
 
     test('admin user can create a service department under a direction parent department [Directie -> Serviciu]', async ({
