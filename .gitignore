@@ -7,4 +7,4 @@ package-lock.json
 .playwright-mcp
 .env
 ./claude/settings.local.json
-./playwright-cli
+.playwright-cli
