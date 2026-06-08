@@ -35,7 +35,7 @@ export const test = pageTest.extend<StepFixtures>({
         await use(new HeaderSteps(headerPage));
     },
 
-    departmentsSteps: async ({ departmentsPage, departmentFormPage }, use) => {
-        await use(new DepartmentsSteps(departmentsPage, departmentFormPage));
+    departmentsSteps: async ({ departmentsPage, departmentFormPage, departmentDetailsPage }, use) => {
+        await use(new DepartmentsSteps(departmentsPage, departmentFormPage, departmentDetailsPage));
     },
 });

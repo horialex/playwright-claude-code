@@ -2,6 +2,7 @@ import { HomePage } from '@/pages/HomePage';
 import { HeaderPage } from '@/pages/HeaderPage';
 import { DepartmentsPage } from '@/pages/DepartmentsPage';
 import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
+import { DepartmentDetailsPage } from '@/pages/DepartmentDetailsPage';
 import { apiTest } from './api.fixtures';
 import { DigitalCitizenPage } from '@/pages/DigitalCitizenPage';
 import { PersonalInformationPage } from '@/pages/PersonalInformationPage';
@@ -18,6 +19,7 @@ type PageFixtures = {
     headerPage: HeaderPage;
     departmentsPage: DepartmentsPage;
     departmentFormPage: DepartmentFormPage;
+    departmentDetailsPage: DepartmentDetailsPage;
 };
 
 export const test = apiTest.extend<PageFixtures>({
@@ -56,5 +58,9 @@ export const test = apiTest.extend<PageFixtures>({
 
     departmentFormPage: async ({ page }, use) => {
         await use(new DepartmentFormPage(page));
+    },
+
+    departmentDetailsPage: async ({ page }, use) => {
+        await use(new DepartmentDetailsPage(page));
     },
 });

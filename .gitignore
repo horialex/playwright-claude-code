@@ -8,3 +8,5 @@ package-lock.json
 .env
 ./claude/settings.local.json
 .playwright-cli
+.playwright
+.claude/settings.local.json

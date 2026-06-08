@@ -1,18 +1,21 @@
 import { expect, test } from '@/fixtures/common.fixtures';
 import { DepartmentsPage } from '@/pages/DepartmentsPage';
 import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
+import { DepartmentDetailsPage } from '@/pages/DepartmentDetailsPage';
 import { Department } from '@/model/Department';
 import { TestLogger } from '@/utils/TestLogger';
-import { DepartmentSectionTab } from '@/constants/DepartmentConstants';
+import { DepartmentModule } from '@/constants/DepartmentConstants';
 import { DepartmentParentPages } from '@/routes/routes';
 
 export class DepartmentsSteps {
     private departmentsPage: DepartmentsPage;
     private departmentFormPage: DepartmentFormPage;
+    private departmentDetailsPage: DepartmentDetailsPage;
 
-    constructor(departmentsPage: DepartmentsPage, departmentFormPage: DepartmentFormPage) {
+    constructor(departmentsPage: DepartmentsPage, departmentFormPage: DepartmentFormPage, departmentDetailsPage: DepartmentDetailsPage) {
         this.departmentsPage = departmentsPage;
         this.departmentFormPage = departmentFormPage;
+        this.departmentDetailsPage = departmentDetailsPage;
     }
 
     async navigateToDepartmentParent(parent: keyof typeof DepartmentParentPages): Promise<void> {
@@ -21,7 +24,7 @@ export class DepartmentsSteps {
         });
     }
 
-    async selectDepartmentTab(parent: DepartmentSectionTab): Promise<void> {
+    async selectDepartmentTab(parent: DepartmentModule): Promise<void> {
         await test.step(`Select department parent: ${parent}`, async () => {
             await this.departmentsPage.selectParentDepartment(parent);
         });
@@ -116,6 +119,18 @@ export class DepartmentsSteps {
                 await this.departmentFormPage.selectParent(department.parent);
             }
             await this.departmentFormPage.fillDescription(department.description);
+        });
+    }
+
+    async verifyDepartmentTitle(expectedName: string): Promise<void> {
+        await test.step(`Verify department title is: ${expectedName}`, async () => {
+            expect(await this.departmentDetailsPage.getPageTitle()).toBe(expectedName);
+        });
+    }
+
+    async openDepartmentDetails(name: string): Promise<void> {
+        await test.step(`Open department details: ${name}`, async () => {
+            await this.departmentsPage.clickDepartmentName(name);
         });
     }
 

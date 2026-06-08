@@ -7,7 +7,16 @@
       "Skill(update-config)",
       "Skill(update-config:*)",
       "Skill(playwright-cli)",
-      "Skill(playwright-cli:*)"
+      "Skill(playwright-cli:*)",
+      "Bash(playwright-cli attach *)",
+      "Bash(playwright-cli --s=default snapshot)",
+      "Bash(playwright-cli --s=default generate-locator e57)",
+      "Bash(playwright-cli --s=default generate-locator e75)",
+      "Bash(playwright-cli --s=default generate-locator e81)",
+      "Bash(playwright-cli --s=default generate-locator e86)",
+      "Bash(playwright-cli --s=default generate-locator e93)",
+      "Bash(playwright-cli --s=default generate-locator e69)",
+      "Bash(npx tsc *)"
     ]
   }
 }

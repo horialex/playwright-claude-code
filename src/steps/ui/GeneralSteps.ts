@@ -9,9 +9,9 @@ export class GeneralSteps {
         this.basePage = new BasePage(page);
     }
 
-    async verifyUserIsOnPage(url: string | RegExp): Promise<void> {
-        await test.step(`Verify user is on page: ${url}`, async () => {
-            await this.basePage.verifyUserIsOnPage(url);
+    async verifyUserIsOnPage(urlPart: string): Promise<void> {
+        await test.step(`Verify user is on page: ${urlPart}`, async () => {
+            await this.basePage.verifyUserIsOnPage(new RegExp(urlPart));
         });
     }
 }

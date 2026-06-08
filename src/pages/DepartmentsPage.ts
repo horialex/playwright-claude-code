@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from '@/pages/BasePage';
-import { DepartmentSectionTab } from '@/constants/DepartmentConstants';
+import { DepartmentModule } from '@/constants/DepartmentConstants';
 
 export class DepartmentsPage extends BasePage {
     private readonly pageHeading: Locator;
@@ -22,7 +22,7 @@ export class DepartmentsPage extends BasePage {
         this.filtersToggleButton = main.locator('button:has(svg[data-testid="ExpandLessIcon"]), button:has(svg[data-testid="ExpandMoreIcon"])');
     }
 
-    async selectParentDepartment(parent: DepartmentSectionTab): Promise<void> {
+    async selectParentDepartment(parent: DepartmentModule): Promise<void> {
         await this.page.getByRole('link', { name: parent }).click();
     }
 
@@ -47,6 +47,10 @@ export class DepartmentsPage extends BasePage {
     async clickDeleteDepartment(name: string): Promise<void> {
         const row = this.departmentsTable.getByRole('row', { name });
         await row.getByRole('button', { name: 'Șterge' }).click();
+    }
+
+    async clickDepartmentName(name: string): Promise<void> {
+        await this.getDepartmentRow(name).first().click();
     }
 
     getDepartmentRow(name: string): Locator {
