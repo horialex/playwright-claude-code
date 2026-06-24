@@ -30,18 +30,18 @@ Identify:
 
 ## Phase 2 — Audit existing layers
 
-Before creating anything, search and read what already exists. Only create what is genuinely missing.
+Before creating anything, search and read what already exists. Only create what is genuinely missing. Use the proper skills where is the case.
 
-| Layer | Location | What to check |
-|-------|----------|---------------|
-| Page Objects | `src/pages/` | Is there a page covering the required UI interactions? Can you add methods to an existing POM? |
-| UI Steps | `src/steps/ui/` | Is there a Steps class for this flow? Can you extend it? |
-| API Services | `src/api/` | Is there a service for the API calls needed? |
-| Fixtures | `src/fixtures/steps.fixtures.ts`, `api.fixtures.ts` | Are the required pages/steps/services already wired? |
-| Factories | `src/factories/` | Is there a factory for the test data needed? |
-| Routes | `src/routes/routes.ts` | Are the relevant URL paths already defined? |
-| Constants | `src/constants/` | Are the required enums / UI strings already defined? |
-| Config | `src/config/users.ts` | Is the right user credential object available? |
+| Layer        | Location                                            | What to check                                                                                  | Skill              |
+| ------------ | --------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------ |
+| Page Objects | `src/pages/`                                        | Is there a page covering the required UI interactions? Can you add methods to an existing POM? | pom-skill          |
+| UI Steps     | `src/steps/ui/`                                     | Is there a Steps class for this flow? Can you extend it?                                       | ui-steps-skill     |
+| API Services | `src/api/`                                          | Is there a service for the API calls needed?                                                   | api-service-skill  |
+| Fixtures     | `src/fixtures/steps.fixtures.ts`, `api.fixtures.ts` | Are the required pages/steps/services already wired?                                           | fixtures-skill     |
+| Factories    | `src/factories/`                                    | Is there a factory for the test data needed?                                                   | data-factory-skill |
+| Routes       | `src/routes/routes.ts`                              | Are the relevant URL paths already defined?                                                    | -                  |
+| Constants    | `src/constants/`                                    | Are the required enums / UI strings already defined?                                           | -                  |
+| Config       | `src/config/users.ts`                               | Is the right user credential object available?                                                 | -                  |
 
 ---
 

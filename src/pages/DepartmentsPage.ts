@@ -23,7 +23,7 @@ export class DepartmentsPage extends BasePage {
     }
 
     async selectParentDepartment(parent: DepartmentModule): Promise<void> {
-        await this.page.getByRole('link', { name: parent }).click();
+        await this.page.getByRole('link', { name: parent }).first().click();
     }
 
     async verifyPageIsLoaded(): Promise<void> {

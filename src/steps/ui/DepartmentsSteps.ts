@@ -122,6 +122,15 @@ export class DepartmentsSteps {
         });
     }
 
+    async verifyDepartmentDetails(department: Department): Promise<void> {
+        await test.step(`Verify department details fields for: ${department.name}`, async () => {
+            expect(await this.departmentDetailsPage.getName()).toBe(department.name);
+            const typeText = await this.departmentDetailsPage.getType();
+            expect(typeText.toLowerCase()).toContain(department.type);
+            expect(await this.departmentDetailsPage.getDescription()).toBe(department.description);
+        });
+    }
+
     async verifyDepartmentTitle(expectedName: string): Promise<void> {
         await test.step(`Verify department title is: ${expectedName}`, async () => {
             expect(await this.departmentDetailsPage.getPageTitle()).toBe(expectedName);

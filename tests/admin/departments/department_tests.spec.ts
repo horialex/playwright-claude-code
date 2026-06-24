@@ -22,6 +22,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
         await departmentsSteps.searchForDepartment(direction.name);
 
         await departmentsSteps.verifyDepartmentIsListed(direction.name);
+        await page.pause()
     });
 
     test('admin user can create a service department under a direction parent department [Directie -> Serviciu]', async ({
@@ -113,7 +114,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
     });
 
 
-    test('admin user can navigate to a department details page', async ({
+    test.only('admin user can create a new department and open it to verify the details', async ({
         departmentService,
         headerSteps,
         departmentsSteps,
@@ -128,7 +129,7 @@ test.describe('Digital Citizen: Admin - Departments(Compartimente)', () => {
 
         await generalSteps.verifyUserIsOnPage(`/compartmentsone/${direction.id}`);
         await departmentsSteps.verifyDepartmentTitle(direction.name);
+        await departmentsSteps.verifyDepartmentDetails(direction);
     });
-
 
 });

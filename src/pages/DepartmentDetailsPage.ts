@@ -49,6 +49,10 @@ export class DepartmentDetailsPage extends BasePage {
         return this.nameInput.inputValue();
     }
 
+    async getType(): Promise<string> {
+        return (await this.typeSelect.innerText()) ?? '';
+    }
+
     async getDescription(): Promise<string> {
         return this.descriptionTextarea.inputValue();
     }
