@@ -16,7 +16,30 @@
       "Bash(playwright-cli --s=default generate-locator e86)",
       "Bash(playwright-cli --s=default generate-locator e93)",
       "Bash(playwright-cli --s=default generate-locator e69)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "mcp__playwright-test__browser_click",
+      "mcp__playwright-test__browser_navigate",
+      "mcp__playwright-test__browser_snapshot",
+      "mcp__playwright-test__browser_type",
+      "mcp__playwright-test__planner_save_plan",
+      "mcp__playwright-test__generator_setup_page",
+      "mcp__playwright-test__generator_read_log",
+      "mcp__playwright-test__planner_setup_page",
+      "mcp__playwright-test__browser_press_key",
+      "mcp__playwright-test__generator_write_test",
+      "mcp__playwright-test__browser_verify_element_visible",
+      "mcp__playwright-test__browser_verify_text_visible",
+      "mcp__playwright-test__browser_navigate_back",
+      "mcp__playwright-test__browser_wait_for",
+      "mcp__playwright-test__browser_evaluate",
+      "mcp__playwright-test__browser_verify_value",
+      "mcp__playwright-test__test_run",
+      "mcp__playwright-test__test_debug",
+      "mcp__playwright-test__test_list"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "playwright",
+    "playwright-test"
+  ]
 }

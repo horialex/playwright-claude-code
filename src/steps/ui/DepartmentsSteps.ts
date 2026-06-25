@@ -93,8 +93,10 @@ export class DepartmentsSteps {
 
     async verifyMultipleDepartmentsListed(): Promise<void> {
         await test.step('Verify multiple departments are listed', async () => {
-            const count = await this.departmentsPage.getVisibleRowCount();
-            expect(count).toBeGreaterThan(1);
+            await expect(async () => {
+                const count = await this.departmentsPage.getVisibleRowCount();
+                expect(count).toBeGreaterThan(1);
+            }).toPass({ timeout: 10000 });
         });
     }
 

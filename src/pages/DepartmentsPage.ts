@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '@/pages/BasePage';
 import { DepartmentModule } from '@/constants/DepartmentConstants';
 
@@ -36,7 +36,7 @@ export class DepartmentsPage extends BasePage {
 
     async search(keyword: string): Promise<void> {
         await this.searchInput.fill(keyword);
-        await this.page.waitForLoadState('networkidle');
+        await expect(this.clearFiltersButton).toBeEnabled();
     }
 
     async clickEditDepartment(name: string): Promise<void> {
@@ -87,16 +87,14 @@ export class DepartmentsPage extends BasePage {
 
     async clickClearFilters(): Promise<void> {
         await this.clearFiltersButton.click();
-        await this.page.waitForLoadState('networkidle');
+        await expect(this.clearFiltersButton).toBeDisabled();
     }
 
     async clickFiltersToggle(): Promise<void> {
         await this.filtersToggleButton.click();
-        await this.page.waitForLoadState('networkidle');
     }
 
     async getVisibleRowCount(): Promise<number> {
-        await this.page.waitForLoadState('networkidle');
-        return await this.departmentsTable.locator('tr:has(div)').count();
+        return await this.departmentsTable.locator('tbody tr').filter({ has: this.page.locator('div') }).count();
     }
 }

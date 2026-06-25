@@ -48,6 +48,7 @@ export class DepartmentFormPage extends BasePage {
 
     async clickSave(): Promise<void> {
         await this.saveButton.click();
+        await this.page.waitForURL(url => !url.pathname.includes('addcompartment'));
     }
 
     async clickCancel(): Promise<void> {
