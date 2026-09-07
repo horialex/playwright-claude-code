@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { Routes } from "@/routes/routes";
 import { MenuOptions } from "@/constants/DigitalCitizenConstants";
-import { BasePage } from "./BasePage";
+import { BasePage } from "../BasePage";
 
 
 export class DigitalCitizenPage extends BasePage {

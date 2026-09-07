@@ -1,13 +1,15 @@
 import { HomePage } from '@/pages/HomePage';
 import { HeaderPage } from '@/pages/HeaderPage';
-import { DepartmentsPage } from '@/pages/DepartmentsPage';
-import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
-import { DepartmentDetailsPage } from '@/pages/DepartmentDetailsPage';
+import { DepartmentsPage } from '@/pages/admin/DepartmentsPage';
+import { DepartmentFormPage } from '@/pages/admin/DepartmentFormPage';
+import { DepartmentDetailsPage } from '@/pages/admin/DepartmentDetailsPage';
 import { apiTest } from './api.fixtures';
-import { DigitalCitizenPage } from '@/pages/DigitalCitizenPage';
+import { DigitalCitizenPage } from '@/pages/admin/DigitalCitizenPage';
 import { PersonalInformationPage } from '@/pages/PersonalInformationPage';
 import { CitizenRequestsPage } from '@/pages/CitizenRequestsPage';
 import { LoginPage } from '@/pages/LoginPage';
+import { EmployeesPage } from '@/pages/admin/EmployeesPage';
+import { AddEmployeeFormPage } from '@/pages/admin/AddEmployeeFormPage';
 
 
 type PageFixtures = {
@@ -20,6 +22,8 @@ type PageFixtures = {
     departmentsPage: DepartmentsPage;
     departmentFormPage: DepartmentFormPage;
     departmentDetailsPage: DepartmentDetailsPage;
+    employeesPage: EmployeesPage;
+    addEmployeeFormPage: AddEmployeeFormPage;
 };
 
 export const test = apiTest.extend<PageFixtures>({
@@ -63,4 +67,13 @@ export const test = apiTest.extend<PageFixtures>({
     departmentDetailsPage: async ({ page }, use) => {
         await use(new DepartmentDetailsPage(page));
     },
+
+    employeesPage: async ({ page }, use) => {
+        await use(new EmployeesPage(page));
+    },
+
+    addEmployeeFormPage: async ({ page }, use) => {
+        await use(new AddEmployeeFormPage(page));
+    },
+
 });

@@ -4,7 +4,7 @@ import { HomePage } from '@/pages/HomePage';
 import { application } from '@/config/apps';
 import { admin, citizen } from '@/config/users';
 import { UserCredentials } from '@/model/User';
-import { DigitalCitizenPage } from '@/pages/DigitalCitizenPage';
+import { DigitalCitizenPage } from '@/pages/admin/DigitalCitizenPage';
 
 export class LoginSteps {
     private loginPage: LoginPage;

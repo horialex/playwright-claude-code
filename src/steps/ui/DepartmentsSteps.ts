@@ -1,7 +1,7 @@
 import { expect, test } from '@/fixtures/common.fixtures';
-import { DepartmentsPage } from '@/pages/DepartmentsPage';
-import { DepartmentFormPage } from '@/pages/DepartmentFormPage';
-import { DepartmentDetailsPage } from '@/pages/DepartmentDetailsPage';
+import { DepartmentsPage } from '@/pages/admin/DepartmentsPage';
+import { DepartmentFormPage } from '@/pages/admin/DepartmentFormPage';
+import { DepartmentDetailsPage } from '@/pages/admin/DepartmentDetailsPage';
 import { Department } from '@/model/Department';
 import { TestLogger } from '@/utils/TestLogger';
 import { DepartmentModule } from '@/constants/DepartmentConstants';
@@ -87,6 +87,13 @@ export class DepartmentsSteps {
     async verifyDepartmentCount(expected: number): Promise<void> {
         await test.step(`Verify department list shows ${expected} result(s)`, async () => {
             const count = await this.departmentsPage.getVisibleRowCount();
+            expect(count).toBe(expected);
+        });
+    }
+
+    async verifyDepartmentsTotalCount(expected: number): Promise<void> {
+        await test.step(`Verify departments total count is ${expected}`, async () => {
+            const count = await this.departmentsPage.getDepartmentsCount();
             expect(count).toBe(expected);
         });
     }

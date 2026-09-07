@@ -3,6 +3,7 @@ import { baseTest } from './base.fixtures';
 import { LoginService } from '@/api/LoginService';
 import { CitizenRequestService } from '@/api/CitizenRequestService';
 import { DepartmentService } from '@/api/DepartmentService';
+import { EmployeeService } from '@/api/EmployeeService';
 
 
 type ApiFixtures = {
@@ -10,6 +11,7 @@ type ApiFixtures = {
     loginService: LoginService;
     citizenRequestService: CitizenRequestService;
     departmentService: DepartmentService;
+    employeeService: EmployeeService;
 };
 
 export const apiTest = baseTest.extend<ApiFixtures>({
@@ -30,5 +32,9 @@ export const apiTest = baseTest.extend<ApiFixtures>({
 
     departmentService: async ({ request }, use) => {
         await use(new DepartmentService(request));
+    },
+
+    employeeService: async ({ request }, use) => {
+        await use(new EmployeeService(request));
     },
 });

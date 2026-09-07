@@ -13,6 +13,8 @@ export const Routes = {
         const module = tab ? DEPARTMENT_MODULE[tab] : undefined;
         return module ? `/api/v1/${module}/departments` : `/api/v1/departments`;
     },
+    USERS: '/api/v1/users',
+    USER: (userId: number) => `/api/v1/users/${userId}`,
 };
 
 export const DigitalCitizenPages = {

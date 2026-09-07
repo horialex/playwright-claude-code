@@ -4,10 +4,7 @@ import { CitizenRequestsSteps } from '@/steps/ui/CitizenRequestsSteps';
 import { GeneralSteps } from '@/steps/ui/GeneralSteps';
 import { HeaderSteps } from '@/steps/ui/HeaderSteps';
 import { DepartmentsSteps } from '@/steps/ui/DepartmentsSteps';
-import { Department, CreateDepartmentPayload } from '@/model/Department';
-import { DepartmentFactory } from '@/factories/DepartmentFactory';
-import { admin } from '@/config/users';
-import { application } from '@/config/apps';
+import { EmployeesSteps } from '@/steps/ui/EmployeeSteps';
 
 type StepFixtures = {
     loginSteps: LoginSteps;
@@ -15,7 +12,7 @@ type StepFixtures = {
     generalSteps: GeneralSteps;
     headerSteps: HeaderSteps;
     departmentsSteps: DepartmentsSteps;
-    parentDirectieDepartment: Department;
+    employeesSteps: EmployeesSteps;
 };
 
 export const test = pageTest.extend<StepFixtures>({
@@ -38,4 +35,9 @@ export const test = pageTest.extend<StepFixtures>({
     departmentsSteps: async ({ departmentsPage, departmentFormPage, departmentDetailsPage }, use) => {
         await use(new DepartmentsSteps(departmentsPage, departmentFormPage, departmentDetailsPage));
     },
+
+    employeesSteps: async ({ employeesPage, addEmployeeFormPage }, use) => {
+        await use(new EmployeesSteps(employeesPage, addEmployeeFormPage));
+    },
+
 });

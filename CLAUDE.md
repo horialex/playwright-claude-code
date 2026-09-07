@@ -51,6 +51,3 @@ Inspect the existing structure, identify the correct layer, and confirm whether 
 ## Environment
 @.claude/environment.md
 
-
-## Additional Instructions
-- When you run the tests run them only for `project=chromium`

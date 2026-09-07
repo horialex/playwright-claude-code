@@ -9,6 +9,7 @@ export class DepartmentsPage extends BasePage {
     private readonly searchInput: Locator;
     private readonly clearFiltersButton: Locator;
     private readonly filtersToggleButton: Locator;
+    private readonly departmentsCountLabel: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -20,6 +21,7 @@ export class DepartmentsPage extends BasePage {
         this.searchInput = main.getByRole('textbox', { name: 'Caută' });
         this.clearFiltersButton = page.getByRole('button', { name: 'Șterge filtrele' });
         this.filtersToggleButton = main.locator('button:has(svg[data-testid="ExpandLessIcon"]), button:has(svg[data-testid="ExpandMoreIcon"])');
+        this.departmentsCountLabel = main.getByText(/Compartimente\s+\(\d+\)/);
     }
 
     async selectParentDepartment(parent: DepartmentModule): Promise<void> {
@@ -96,5 +98,11 @@ export class DepartmentsPage extends BasePage {
 
     async getVisibleRowCount(): Promise<number> {
         return await this.departmentsTable.locator('tbody tr').filter({ has: this.page.locator('div') }).count();
+    }
+
+    async getDepartmentsCount(): Promise<number> {
+        const label = await this.departmentsCountLabel.innerText();
+        const match = label.match(/\((\d+)\)/);
+        return match ? parseInt(match[1], 10) : 0;
     }
 }

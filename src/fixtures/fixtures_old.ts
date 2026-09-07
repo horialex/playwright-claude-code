@@ -1,7 +1,7 @@
 import { APIRequestContext, test as base, BrowserContext, Page } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { HomePage } from '../pages/HomePage';
-import { DigitalCitizenPage } from '@/pages/DigitalCitizenPage';
+import { DigitalCitizenPage } from '@/pages/admin/DigitalCitizenPage';
 import { PersonalInformationPage } from '@/pages/PersonalInformationPage';
 
 type MyFixtures = {
